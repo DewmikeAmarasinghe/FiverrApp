@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html,
+body {
+  background-color: var(--color-white);
+}
+
+@layer components {
+
+    /* navbar component */
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--color-white);
+        color: var(--color-white);
+        transition: 0.5s all ease;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        color: var(--color-black);
+    }
+    
+    .navbar.active {
+        background-color: var(--color-white);
+    }
+    
+    .navlink {
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        @variant hover {
+            color: var(--color-green-600);
+        }
+    }
+    .c-width {
+        width: calc(100% *11/12);
+        margin-inline: auto;
+        max-width: 1400px;
+    }
+    @media (min-width: 480px) {
+        .c-width {
+            width: 87%;
+            margin-inline: auto;
+            max-width: 1400px;
+        }
+    }
+    @media (min-width: 640px) {
+        .c-width {
+            width: 80%;
+            margin-inline: auto;
+            max-width: 1400px;
+        }
+    }
+    
+    .option {
+        margin-bottom: var(--spacing-2);
+        display: block;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        @variant hover {
+            color: var(--color-slate-900);
+            text-shadow: var(--text-shadow-sm);
+            text-shadow-color: var(--color-slate-100);
+        }
+    }
+
+    /* featured */
+
+    .popular{
+        padding: 0.5em 1em;
+        display: flex;
+        border: 1px solid white;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: var(--radius-xl);
+        opacity: 0.9;
+        cursor: pointer;
+
+        @variant hover{
+            background-color: var(--color-slate-800);
+            font-weight: 500;
+        }
+    }
+}
