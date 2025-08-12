@@ -38,8 +38,9 @@ const allowedOrigins = [
   process.env.RAILWAY_STATIC_URL || null,
   // Manual comma-separated list
   ...(process.env.CORS_ALLOWED_ORIGINS ? process.env.CORS_ALLOWED_ORIGINS.split(",").map(o => o.trim()) : []),
-  // Explicit deployed link (safety)
-  process.env.DEPLOYED_URL || "https://fiverr-production-e82c.up.railway.app",
+  // Netlify frontend
+  "https://fiverrappnetlify.netlify.app",
+  "https://*.netlify.app",
 ].filter(Boolean);
 
 app.use(
