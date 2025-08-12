@@ -5,7 +5,6 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "npm --prefix Backend install && npm --prefix Frontend install && npm --prefix Frontend run build",
     "start": "npm --prefix Backend start"
   }
 }

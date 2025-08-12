@@ -12,4 +12,13 @@ coverage
 .idea
 *.swp
 *.swo
-*~ 
+*~
+Frontend/node_modules
+Frontend/build
+Frontend/dist
+Backend/node_modules
+*.md
+.env.local
+.env.development
+.env.test
+.env.production 
