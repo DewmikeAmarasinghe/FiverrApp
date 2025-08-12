@@ -57,7 +57,7 @@ function Login() {
             <p className="text-gray-600">Log in to find the perfect freelance services</p>
           </div>
 
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
                 htmlFor="username"
@@ -112,7 +112,7 @@ function Login() {
             )}
 
             <button
-              onClick={handleSubmit}
+              type="submit"
               disabled={isLoading || !username.trim() || !password.trim()}
               className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
@@ -128,7 +128,7 @@ function Login() {
                 "Login"
               )}
             </button>
-          </div>
+          </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
