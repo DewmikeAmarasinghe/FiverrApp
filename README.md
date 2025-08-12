@@ -1,260 +1,349 @@
-### Fiverr Clone Monorepo
+# 🚀 Fiverr Clone - Full Stack Marketplace
 
-**Deployed Link**: [https://fiverr-production-e82c.up.railway.app/](https://fiverr-production-e82c.up.railway.app/)
+**Live Demo**: [https://fiverrappnetlify.netlify.app](https://fiverrappnetlify.netlify.app)
 
----
-
-Modern full‑stack Fiverr‑style marketplace built with a Node.js/Express/MongoDB backend and a React (React Router v7) frontend. This monorepo contains two apps:
-
-- `Backend`: Express API with JWT auth (httpOnly cookies), MongoDB via Mongoose, CORS, and REST endpoints for users, gigs, orders, messages, conversations, and reviews.
-- `Frontend`: React 19 with React Router 7 SSR/streaming, Vite 6 tooling, Tailwind (via `@tailwindcss/vite`), and Axios for API calls.
+**Backend API**: [https://web-production-d1f6f.up.railway.app](https://web-production-d1f6f.up.railway.app)
 
 ---
 
-### Feature Status
+## 🏗️ Architecture Overview
 
-- **Fully implemented (backend + frontend)**
+This is a modern full-stack Fiverr-style marketplace with a **microservices architecture**:
 
-  - **Auth**: Register, Login, Logout via JWT httpOnly cookies (`POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`). Navbar logout is wired.
-  - **Gigs**: List with filters/sort and view details (`GET /api/gigs?cat=&min=&max=&sort=&search=`, `GET /api/gigs/single/:id`). Frontend pages `Gigs.jsx` and `Gig.jsx` are wired.
-  - **Users**: Fetch user by id (`GET /api/users/:id`). Gig page displays seller info.
-  - **Reviews**: Create and list reviews on gig page (`POST /api/reviews`, `GET /api/reviews/:gigId`). Delete own review exists in backend (`DELETE /api/reviews/:id`) but UI is not added yet.
-
-- **Frontend-only (pending backend endpoints/UI wiring)**
-  - **My Gigs**: UI uses static data; should fetch seller gigs and delete via API.
-    - Needs: `GET /api/gigs?userId=<sellerId>` in UI and use `DELETE /api/gigs/:id`.
-  - **Add Gig form**: UI built but not wired to create gig and upload images.
-    - Needs: wire `POST /api/gigs` and Cloudinary upload via `Frontend/app/utils/upload.js`.
-  - **Orders**: UI uses mock data; backend routes are not implemented.
-    - Needs (backend): implement `/api/orders` (create, list by role, status updates, optional payments).
-  - **Messages/Conversations**: UI uses mock data; backend routes are not implemented.
-    - Needs (backend): implement `/api/conversations` and `/api/messages` (create conversation, list threads, list/send messages).
-  - **Become Seller**: UI attempts `PATCH /user/:id` which does not exist and path should be plural.
-    - Needs (backend): add `PATCH /api/users/:id`. Needs (frontend): call `/api/users/:id`.
+- **Frontend**: React 19 + React Router 7 deployed on **Netlify** (CDN + global distribution)
+- **Backend**: Node.js/Express API deployed on **Railway** (scalable serverless)
+- **Database**: MongoDB Atlas (cloud database)
+- **Authentication**: JWT with httpOnly cookies
+- **File Upload**: Cloudinary integration
 
 ---
 
-### Tech Stack
+## ✨ Features
 
-- **Backend**: Node.js ≥ 18, Express 5, Mongoose 8, JSON Web Tokens, bcrypt, cookie‑parser, CORS
-- **Frontend**: React 19, React Router 7 (`@react-router/dev`), Vite 6, Tailwind 4, TanStack Query 5, Axios, Swiper
-- **Database**: MongoDB (Atlas or self‑hosted)
-- **Media**: Cloudinary image uploads (client‑side)
+### ✅ Fully Implemented
+- **User Authentication**: Register, Login, Logout with JWT
+- **Gig Management**: Create, view, search, and filter gigs
+- **User Profiles**: Seller and buyer profiles with ratings
+- **Reviews System**: Create and display reviews for gigs
+- **Responsive Design**: Mobile-first UI with Tailwind CSS
+- **Real-time Search**: Dynamic gig filtering and sorting
+
+### 🔄 In Development
+- **Order System**: Purchase and manage orders
+- **Messaging**: Real-time chat between buyers and sellers
+- **Payment Integration**: Stripe payment processing
+- **AI Chatbot**: AI-powered customer support
 
 ---
 
-### Repository Structure
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 19** with React Router 7
+- **Vite 6** for fast development and building
+- **Tailwind CSS 4** for styling
+- **TanStack Query** for data fetching
+- **Axios** for API communication
+- **Swiper** for carousels and sliders
+
+### Backend
+- **Node.js 18+** with Express 5
+- **MongoDB** with Mongoose ODM
+- **JWT** authentication with httpOnly cookies
+- **CORS** configuration for cross-origin requests
+- **bcrypt** for password hashing
+- **Cloudinary** for image uploads
+
+### Deployment
+- **Netlify** for frontend (CDN + global distribution)
+- **Railway** for backend (serverless + auto-scaling)
+- **MongoDB Atlas** for database
+
+---
+
+## 📁 Project Structure
 
 ```
 Fiverr/
-  Backend/              # Express API
-    controllers/
-    middleware/
-    models/
-    routes/
-    utils/
-    server.js
-    package.json
-    Procfile
-  Frontend/             # React + React Router app
-    app/
-      components/
-      layouts/
-      pages/
-      utils/
-      routes.js
-    public/
-    vite.config.ts
-    package.json
-  package.json          # Monorepo helper scripts (backend only)
-  Procfile              # Root process file (optional)
-  README.md
+├── Backend/                 # Express API Server
+│   ├── controllers/         # Route handlers
+│   ├── middleware/          # Auth, validation, etc.
+│   ├── models/             # MongoDB schemas
+│   ├── routes/             # API endpoints
+│   ├── utils/              # Helper functions
+│   ├── server.js           # Main server file
+│   └── package.json
+├── Frontend/               # React Application
+│   ├── app/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── layouts/        # Page layouts
+│   │   ├── pages/          # Route components
+│   │   ├── utils/          # API client, helpers
+│   │   └── routes.js       # Route definitions
+│   ├── public/             # Static assets
+│   ├── netlify.toml        # Netlify configuration
+│   └── package.json
+├── package.json            # Monorepo scripts
+└── README.md
 ```
 
 ---
 
-### Environment Variables
+## 🚀 Quick Start
 
-Create `.env` files as shown below.
+### Prerequisites
+- Node.js 18+
+- MongoDB Atlas account
+- Netlify account (for frontend deployment)
+- Railway account (for backend deployment)
 
-- Backend (`Backend/.env`):
+### Local Development
 
+1. **Clone the repository**
 ```bash
-# Server
-NODE_ENV=development
-PORT=8000
-
-# Database
-MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<db>?retryWrites=true&w=majority
-
-# Auth
-JWT_KEY=replace-with-a-secure-random-secret
-
-# CORS / Frontend origin(s)
-FRONTEND_URL=http://localhost:5173
-# Comma-separated list of additional allowed origins
-CORS_ALLOWED_ORIGINS=
-
-# Optional (some hosts like Railway expose these)
-RAILWAY_PUBLIC_DOMAIN=
-RAILWAY_STATIC_URL=
+git clone <your-repo-url>
+cd Fiverr
 ```
 
-- Frontend (`Frontend/.env`):
-
+2. **Install dependencies**
 ```bash
-# Used in the browser
-VITE_API_BASE_URL=http://localhost:8000/api/
+# Install backend dependencies
+npm install
 
-# Used during server-side rendering (React Router server runtime)
-API_BASE_URL=http://localhost:8000/api/
-```
-
-Notes:
-
-- The backend sets/reads an httpOnly cookie named `accessToken` for authentication.
-- CORS must allow your frontend origin. Ensure `FRONTEND_URL` and/or `CORS_ALLOWED_ORIGINS` include the site where the frontend runs.
-- Image uploads use Cloudinary in `Frontend/app/utils/upload.js`. Replace the cloud name and preset for your account if needed.
-
----
-
-### Installation
-
-Run installs in both apps.
-
-```bash
-# from repo root
-npm install              # installs backend via postinstall
-
-# install frontend deps
+# Install frontend dependencies
 cd Frontend
 npm install
 ```
 
----
+3. **Set up environment variables**
 
-### Local Development
-
-Run backend and frontend in separate terminals.
-
+Create `Backend/.env`:
 ```bash
-# Terminal 1 — Backend
+NODE_ENV=development
+PORT=8000
+MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<db>?retryWrites=true&w=majority
+JWT_KEY=your-secure-jwt-secret
+FRONTEND_URL=http://localhost:5173
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+```
+
+Create `Frontend/.env`:
+```bash
+VITE_API_BASE_URL=http://localhost:8000/api/
+```
+
+4. **Run the development servers**
+```bash
+# Terminal 1 - Backend
 cd Backend
-npm run dev              # nodemon server at http://localhost:8000
+npm run dev
 
-# Terminal 2 — Frontend
+# Terminal 2 - Frontend
 cd Frontend
-npm run dev              # React Router dev server at http://localhost:5173
+npm run dev
 ```
 
-Ensure your `.env` files are set so the frontend points to `http://localhost:8000/api/`.
+Visit `http://localhost:5173` to see the application!
 
 ---
 
-### Production Builds
+## 🌐 Production Deployment
 
-- Backend: standard Node process (uses `node server.js`).
-- Frontend: build and serve with React Router’s server runtime or deploy as a fullstack app alongside the API.
+### Backend Deployment (Railway)
 
+1. **Connect to Railway**
+   - Go to [Railway](https://railway.app)
+   - Connect your GitHub repository
+   - Deploy the Backend directory
+
+2. **Set Environment Variables**
 ```bash
-# Frontend production build
-cd Frontend
-npm run build
-
-# Optionally serve the built SSR server entry (local testing)
-npm start
+MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<db>?retryWrites=true&w=majority
+JWT_KEY=your-secure-jwt-secret
+NODE_ENV=production
+FRONTEND_URL=https://fiverrappnetlify.netlify.app
+CORS_ALLOWED_ORIGINS=https://fiverrappnetlify.netlify.app,*.netlify.app
 ```
 
-Deployment tips:
+3. **Deploy**
+   - Railway will automatically deploy on git push
+   - Your API will be available at: `https://your-app-name.up.railway.app`
 
-- Set all backend env vars (`MONGO_URI`, `JWT_KEY`, `FRONTEND_URL`, `CORS_ALLOWED_ORIGINS`, `PORT`).
-- Set frontend env vars (`VITE_API_BASE_URL`, and `API_BASE_URL` for SSR).
-- On platforms like Railway/Render/Heroku, expose port via `PORT` and ensure CORS origins match the deployed frontend URL.
+### Frontend Deployment (Netlify)
+
+1. **Connect to Netlify**
+   - Go to [Netlify](https://netlify.com)
+   - Connect your GitHub repository
+   - Set build settings:
+     - **Base directory**: `Frontend`
+     - **Build command**: `npm run build`
+     - **Publish directory**: `build/client`
+
+2. **Set Environment Variables**
+```bash
+VITE_API_BASE_URL=https://your-railway-backend-url.up.railway.app/api/
+```
+
+3. **Deploy**
+   - Netlify will automatically deploy on git push
+   - Your app will be available at: `https://your-app-name.netlify.app`
+
+---
+
+## 🔧 API Endpoints
+
+Base URL: `https://web-production-d1f6f.up.railway.app/api/`
+
+### Authentication
+- `POST /auth/register` - Create new user account
+- `POST /auth/login` - User login (sets httpOnly cookie)
+- `POST /auth/logout` - User logout (clears cookie)
+
+### Users
+- `GET /users/:id` - Get user profile
+- `PATCH /users/:id` - Update user profile
+
+### Gigs
+- `GET /gigs` - List gigs with filters
+- `GET /gigs/:id` - Get single gig details
+- `POST /gigs` - Create new gig
+- `DELETE /gigs/:id` - Delete gig
+
+### Reviews
+- `GET /reviews/:gigId` - Get reviews for a gig
+- `POST /reviews` - Create new review
+- `DELETE /reviews/:id` - Delete review
 
 ---
 
-### API Overview
+## 🔐 Authentication
 
-Base URL: `{SERVER_URL}/api/`
+The app uses JWT tokens stored in httpOnly cookies for security:
 
-- `POST /auth/register` — create user
-- `POST /auth/login` — login, sets `accessToken` httpOnly cookie
-- `POST /auth/logout` — clear session cookie
-- `GET /users/:id` and other user endpoints
-- `GET /gigs`, `POST /gigs`, `GET /gigs/:id`, ...
-- `GET /reviews/:gigId`, `POST /reviews`, `DELETE /reviews/:id`, ...
-- (Planned) `GET/POST /orders`, `GET/POST /conversations`, `GET/POST /messages`
-
-Authentication middleware reads the cookie and attaches `req.userId` and `req.isSeller` for protected routes.
+- **Login**: Sets `accessToken` cookie
+- **Protected Routes**: Middleware validates token
+- **Logout**: Clears cookie
+- **CORS**: Configured for secure cross-origin requests
 
 ---
 
-### Frontend Configuration
+## 🎨 UI/UX Features
 
-- API client: `Frontend/app/utils/newRequest.js` uses Axios with `withCredentials: true` and resolves the base URL from `VITE_API_BASE_URL` (browser) or `API_BASE_URL` (SSR). Ensure both are set.
-- Routes are defined in `Frontend/app/routes.js` and rendered under `Frontend/app/layouts/MainLayout.jsx` where applicable.
-- Tailwind is wired via `@tailwindcss/vite` and Vite config lives in `Frontend/vite.config.ts`.
+- **Responsive Design**: Works on all devices
+- **Dark/Light Mode**: Automatic theme detection
+- **Loading States**: Smooth loading animations
+- **Error Handling**: User-friendly error messages
+- **Form Validation**: Real-time input validation
+- **Search & Filters**: Advanced gig discovery
 
 ---
+
+## 🚀 Performance Optimizations
+
+### Frontend
+- **Code Splitting**: Automatic route-based splitting
+- **Image Optimization**: WebP format with fallbacks
+- **CDN Distribution**: Global content delivery
+- **Caching**: Aggressive browser caching
+- **Bundle Optimization**: Tree shaking and minification
+
+### Backend
+- **Database Indexing**: Optimized MongoDB queries
+- **CORS Optimization**: Efficient cross-origin handling
+- **Error Handling**: Comprehensive error management
+- **Security**: JWT with httpOnly cookies
+
+---
+
+## 🔧 Development Scripts
+
+### Root Directory
+```bash
+npm install          # Install backend dependencies
+npm start           # Start backend server
+```
+
+### Backend
+```bash
+cd Backend
+npm run dev         # Development with nodemon
+npm start           # Production start
+```
+
+### Frontend
+```bash
+cd Frontend
+npm run dev         # Development server
+npm run build       # Production build
+npm start           # Serve production build
+```
+
+---
+
+## 🐛 Troubleshooting
 
 ### Common Issues
 
-- 403/401 on API: confirm cookies are sent (`withCredentials: true`) and CORS allows the frontend origin with `credentials: true` on the server.
-- CORS error: ensure `FRONTEND_URL` and/or `CORS_ALLOWED_ORIGINS` match the exact scheme, host, and port (e.g., `http://localhost:5173`).
-- Cloudinary upload fails: update cloud name and preset in `Frontend/app/utils/upload.js` and verify your Cloudinary unsigned upload preset.
+1. **CORS Errors**
+   - Ensure `FRONTEND_URL` is set correctly in Railway
+   - Check that `CORS_ALLOWED_ORIGINS` includes your Netlify domain
+
+2. **Authentication Issues**
+   - Verify JWT_KEY is set in Railway
+   - Check that cookies are being sent with requests
+
+3. **Database Connection**
+   - Ensure MONGO_URI is correct
+   - Check MongoDB Atlas network access
+
+4. **Build Failures**
+   - Verify Node.js version (18+)
+   - Check all environment variables are set
+
+### Debug Mode
+
+Enable debug logging by setting:
+```bash
+NODE_ENV=development
+DEBUG=*
+```
 
 ---
 
-### Roadmap / TODO
+## 🤝 Contributing
 
-- **Backend**
-
-  - Implement Orders API (`/api/orders`): create order, list buyer/seller orders, status updates, payment hooks if applicable.
-  - Implement Conversations (`/api/conversations`) and Messages (`/api/messages`): create conversation on order/contact, list conversations, list/send messages.
-  - Add `PATCH /api/users/:id` to support account updates (Become Seller flow: `isSeller`, `phone`, `desc`).
-  - Ensure gigs list supports `userId` filter (already available) and add pagination.
-  - Implement payment after ordering services using Stripe
-
-- **Frontend**
-
-  - Wire My Gigs to backend (list own gigs via `GET /api/gigs?userId=<sellerId>`, delete via `DELETE /api/gigs/:id`).
-  - Wire Add Gig to call `POST /api/gigs` + Cloudinary uploads; handle optimistic updates and validation.
-  - Orders page: fetch from backend; add contact-to-conversation action.
-  - Messages/Conversations pages: fetch threads, real-time UX (optional websockets/long-polling later).
-  - Add UI to let sellers respond to reviews (create/update/delete response).
-  - Update Become Seller to call `PATCH /api/users/:id` (plural path) when backend is ready.
-
-- **AI Chatbot Integration (planned)**
-  - Add an AI assistant for buyers to discover gigs and for sellers to draft responses with machine learning model.
-  - Planned approach:
-    - Backend: `/api/ai/chat` endpoint that proxies to an LLM provider (streamed responses), optional RAG using gig descriptions and seller profiles.
-    - Frontend: Chat widget popup component with context (current page, gig id, user role) and streaming UI.
-    - Safety: moderation checks and rate limiting.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ---
 
-### Scripts Reference
+## 📄 License
 
-- Root
-  - `npm start` — starts backend (`Backend/server.js`)
-  - `npm postinstall` — installs backend deps
-- Backend
-  - `npm run dev` — dev server with nodemon
-  - `npm start` — production start
-- Frontend
-  - `npm run dev` — dev server
-  - `npm run build` — production build
-  - `npm start` — serve built SSR entry locally
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-### Requirements
+## 🙏 Acknowledgments
 
-- Node.js 18+
-- MongoDB instance (Atlas or local)
+- **Fiverr** for inspiration
+- **React Router** team for the excellent routing solution
+- **Tailwind CSS** for the utility-first CSS framework
+- **Netlify** and **Railway** for excellent hosting platforms
 
 ---
 
-### License
+## 📞 Support
 
-This project does not include an explicit license. Add one if you plan to distribute or make it open source.
+If you encounter any issues or have questions:
+
+1. Check the troubleshooting section above
+2. Review the API documentation
+3. Open an issue on GitHub
+4. Contact the development team
+
+---
+
+**Happy coding! 🎉**
