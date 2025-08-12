@@ -5,7 +5,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "postinstall": "npm --prefix Backend ci || npm --prefix Backend install",
+    "postinstall": "npm --prefix Backend install",
     "start": "npm --prefix Backend start"
   }
 }
