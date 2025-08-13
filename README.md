@@ -7,6 +7,7 @@
 ---
 
 ## Try responsiveness (;
+## Try using the DEMO user_names & passwords
 
 ## 🏗️ Architecture Overview
 
