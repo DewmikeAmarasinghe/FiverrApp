@@ -6,6 +6,8 @@
 
 ---
 
+## Try responsiveness (;
+
 ## 🏗️ Architecture Overview
 
 This is a modern full-stack Fiverr-style marketplace with a **microservices architecture**:
